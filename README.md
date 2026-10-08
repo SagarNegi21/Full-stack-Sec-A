@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CampusConnect
 Role-based college event and announcement portal using Express, MongoDB, Redis, Socket.io, React, Redux Toolkit and Docker.
 
@@ -23,3 +24,6 @@ For a fair 100+ request comparison, first run after `DEL events:list` (uncached)
 
 ## Testing
 `docker compose exec backend npm test` and `npm test` in frontend. The backend suite includes environment-independent Supertest cases. For a production-grade five-case suite, use mongodb-memory-server or a dedicated test MongoDB and seed ADMIN/STUDENT users.
+=======
+# Full-stack-Sec-A
+>>>>>>> c0e0a91ed582c287f113f67070d4d8fbbea60c47
