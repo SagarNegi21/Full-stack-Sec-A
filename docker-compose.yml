@@ -1,0 +1,36 @@
+services:
+  mongo:
+    image: mongo:7
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  backend:
+    build: ./backend
+    environment:
+      PORT: 5000
+      MONGO_URI: mongodb://mongo:27017/campusconnect
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET:-dev_access_change_me}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-dev_refresh_change_me}
+      FRONTEND_ORIGIN: http://localhost:3000
+      NODE_ENV: development
+    depends_on:
+      - mongo
+      - redis
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  mongo_data:

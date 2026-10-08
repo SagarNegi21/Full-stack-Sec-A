@@ -1,0 +1,2 @@
+import {describe,it,expect} from 'vitest';import {render,screen} from '@testing-library/react';import {Provider} from 'react-redux';import {store,setEvents} from '../app/store';import Events from '../pages/Events';import {MemoryRouter} from 'react-router-dom';
+it('renders event list',()=>{store.dispatch(setEvents([{_id:'1',title:'Hackathon',description:'Build stuff'}]));render(<Provider store={store}><MemoryRouter><Events/></MemoryRouter></Provider>);expect(screen.getByText('Hackathon')).toBeInTheDocument()});

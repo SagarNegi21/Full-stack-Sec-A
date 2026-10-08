@@ -1,0 +1,3 @@
+const r=require('express').Router(),Announcement=require('../models/Announcement'),{authenticate,authorize}=require('../middleware/auth'),validate=require('../middleware/validate'),s=require('../schemas');
+r.get('/',authenticate,async(req,res)=>res.json(await Announcement.find().sort({createdAt:-1}).limit(50).lean()));
+r.post('/',authenticate,authorize('ADMIN'),validate(s.announcement),async(req,res)=>{const a=await Announcement.create({...req.body,createdBy:req.user.sub});const io=req.app.get('io');io.to('students').emit('new-announcement',{id:a._id,title:a.title,content:a.content,createdAt:a.createdAt});res.status(201).json(a)});module.exports=r;

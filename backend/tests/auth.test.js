@@ -1,0 +1,3 @@
+const request=require('supertest');
+const app=require('../src/app');
+describe('CampusConnect API',()=>{test('health route responds',async()=>expect((await request(app).get('/api/health')).status).toBe(200));test('protected events route rejects without token',async()=>expect((await request(app).get('/api/events')).status).toBe(401));test('login validation rejects malformed input',async()=>expect((await request(app).post('/api/auth/login').send({email:'bad'})).status).toBe(400));test('admin-only route rejects student/no token',async()=>expect((await request(app).post('/api/events').send({title:'x',date:'2027-01-01'})).status).toBe(401));});

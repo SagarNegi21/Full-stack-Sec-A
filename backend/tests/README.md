@@ -1,0 +1,1 @@
+For the full five requested integration cases, add mongodb-memory-server or a dedicated test MongoDB and seed users. The provided app includes the core routes and four environment-independent Supertest tests; event creation should be tested with an authenticated ADMIN against the test database.
